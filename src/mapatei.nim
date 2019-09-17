@@ -1,2 +1,2 @@
-import mapatei/[coda, letters, word]
-export coda, letters, word
+import mapatei/[letters, syllable, word]
+export letters, syllable, word

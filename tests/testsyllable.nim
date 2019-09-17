@@ -1,14 +1,14 @@
 import unittest
-import mapatei/coda
+import mapatei/syllable
 
-suite "Coda":
+suite "Syllable":
   const words = ["pirumi", "kho", "lundose", "thelitheli", "fōmbu"]
 
   for w in words:
     test w:
       var count = 0
-      for coda in w.codas:
-        echo coda
+      for syllable in w.syllables:
+        echo syllable
         count += 1
 
       assert count != 0

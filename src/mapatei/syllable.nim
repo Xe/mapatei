@@ -3,7 +3,7 @@ import fsm
 import letters
 
 type
-  Coda* = object of RootObj
+  Syllable* = object of RootObj
     consonant*: Option[Letter]
     vowel*: Letter
     stressed*: bool
@@ -25,7 +25,7 @@ proc toEvent(l: Letter): Event =
   else:
     result = Event.Consonant
 
-iterator codas*(word: string): Coda =
+iterator syllables*(word: string): Syllable =
   var m = newMachine[State, Event](State.Init)
   m.addTransition(State.Init, Event.Consonant, State.Consonant)
   m.addTransition(State.Init, Event.Vowel, State.Vowel)
@@ -34,7 +34,7 @@ iterator codas*(word: string): Coda =
   m.addTransition(State.Vowel, Event.Vowel, State.End)
   m.addTransition(State.Vowel, Event.EndOfInput, State.End)
 
-  var curr: Coda
+  var curr: Syllable
 
   for l in word.letters:
     #echo l
@@ -46,7 +46,7 @@ iterator codas*(word: string): Coda =
     #echo fmt"{old}, {ev} -> {new}"
     if new == State.End:
       yield curr
-      curr = Coda()
+      curr = Syllable()
       fsm.reset(m)
 
     case ev
