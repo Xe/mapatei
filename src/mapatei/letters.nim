@@ -46,7 +46,7 @@ iterator letters*(inp: string): Letter =
     template yieldVowel() =
       yield Letter(isVowel: true, stressed: false, value: $rune)
     template yieldStVowel() =
-      yield Letter(isVowel: true, stressed: true, value: $rune)
+      yield Letter(isVowel: true, stressed: true, value: unstress $rune)
     template yieldConsonantSimple() =
       yield Letter(isVowel: false, value: unstress $rune)
     template yieldComplexConsonant(val: string) =
