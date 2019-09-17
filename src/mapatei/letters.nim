@@ -15,6 +15,15 @@ const
   vowels = ["a", "e", "i", "o", "u"]
   stVowels = ["ā", "ē", "ī", "ō", "ū"]
 
+proc stress*(s: string): string =
+  if not (s in vowels):
+    return s
+  proc replacement(key: string): string =
+    let i = vowels.find(key)
+    assert i != -1
+    stVowels[i]
+  s.translate replacement
+
 proc unstress*(s: string): string =
   if not (s in stVowels):
     return s
