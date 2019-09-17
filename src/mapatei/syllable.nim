@@ -9,15 +9,23 @@ type
     stressed*: bool
 
   State {.pure.} = enum
-    Init,
-    Consonant,
-    Vowel,
-    End
+    Init = "stateInit",
+    Consonant = "stateConsonant",
+    Vowel = "stateVowel",
+    End = "stateEnd"
 
   Event {.pure.} = enum
-    Consonant,
-    Vowel,
-    EndOfInput
+    Consonant = "eventConsonant",
+    Vowel = "eventVowel",
+    EndOfInput = "eventEndOfInput"
+
+proc display*(s: Syllable): string =
+  if s.consonant.isSome:
+    result = result & s.consonant.get.value
+  if s.stressed:
+    result = result & s.vowel.value.stress
+  else:
+    result = result & s.vowel.value
 
 proc toEvent(l: Letter): Event =
   if l.isVowel:
@@ -34,16 +42,17 @@ iterator syllables*(word: string): Syllable =
   m.addTransition(State.Vowel, Event.Vowel, State.End)
   m.addTransition(State.Vowel, Event.EndOfInput, State.End)
 
-  var curr: Syllable
+  var
+    curr: Syllable
 
   for l in word.letters:
-    #echo l
+    # echo l
     let old = m.getCurrentState
     let ev = l.toEvent
     m.process ev
 
     let new = m.getCurrentState
-    #echo fmt"{old}, {ev} -> {new}"
+    # echo fmt"{old}, {ev} -> {new}"
     if new == State.End:
       yield curr
       curr = Syllable()
@@ -54,6 +63,7 @@ iterator syllables*(word: string): Syllable =
       curr.vowel = l
       curr.stressed = l.stressed
     of Event.Consonant:
+      assert curr.consonant.isNone
       curr.consonant = some l
     else:
       assert false

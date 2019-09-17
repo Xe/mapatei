@@ -9,7 +9,6 @@ type
     value*: string
 
 const
-  #consonants = ["f", "j", "k", "kh", "l", "m", "mb", "nd", "ng", "p", "ph", "r", "s", "t", "th", "w", "y"]
   simpleConsonants = ["f", "j", "l", "r", "s", "w", "y"]
   complexConsonants = ["k", "m", "n", "p", "t"]
   vowels = ["a", "e", "i", "o", "u"]

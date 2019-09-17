@@ -1,10 +1,7 @@
 import strformat, unittest
 
 import mapatei/letters
-
-const
-  vowels = ["a", "e", "i", "o", "u"]
-  stVowels = ["ā", "ē", "ī", "ō", "ū"]
+include common
 
 suite "stress":
   for v in stVowels:
@@ -25,8 +22,6 @@ suite "unstress":
       assert v.unstress == vowels[i]
 
 suite "Letter":
-  const words = ["pirumi", "kho", "lundose", "thelitheli", "fōmbu"]
-
   for word in words:
     test word:
       for l in word.letters:

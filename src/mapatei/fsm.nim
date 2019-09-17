@@ -12,7 +12,7 @@ type
     transitionsAny: TableRef[S, Transition[S]]
     defaultTransition: Option[Transition[S]]
 
-  TransitionNotFoundException = object of Exception
+  TransitionNotFoundException* = object of Exception
 
 proc reset*(m: Machine) =
   m.currentState = some(m.initialState)
