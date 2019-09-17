@@ -16,6 +16,8 @@ const
   stVowels = ["ā", "ē", "ī", "ō", "ū"]
 
 proc unstress*(s: string): string =
+  if not (s in stVowels):
+    return s
   proc replacement(key: string): string =
     let i = stVowels.find(key)
     assert i != -1
@@ -37,7 +39,7 @@ iterator letters*(inp: string): Letter =
     template yieldStVowel() =
       yield Letter(isVowel: true, stressed: true, value: $rune)
     template yieldConsonantSimple() =
-      yield Letter(isVowel: false, value: $rune)
+      yield Letter(isVowel: false, value: unstress $rune)
     template yieldComplexConsonant(val: string) =
       skip = true
       yield Letter(isVowel: false, value: val)

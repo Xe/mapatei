@@ -1,6 +1,6 @@
 import strformat, unittest
 
-import mapatatei/letters
+import mapatei/letters
 
 suite "unstress":
   const
@@ -12,7 +12,7 @@ suite "unstress":
       assert v.unstress == vowels[i]
 
 suite "Letter":
-  const words = ["ondko", "pirumi", "kho", "lundose", "thelitheli"]
+  const words = ["ondko", "pirumi", "kho", "lundose", "thelitheli", "fōmbu"]
 
   for word in words:
     test word:
