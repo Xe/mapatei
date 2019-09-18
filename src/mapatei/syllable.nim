@@ -37,6 +37,7 @@ iterator syllables*(word: string): Syllable =
   var m = newMachine[State, Event](State.Init)
   m.addTransition(State.Init, Event.Consonant, State.Consonant)
   m.addTransition(State.Init, Event.Vowel, State.Vowel)
+  m.addTransition(State.Init, Event.EndOfInput, State.End)
   m.addTransition(State.Consonant, Event.Vowel, State.Vowel)
   m.addTransition(State.Vowel, Event.Consonant, State.End)
   m.addTransition(State.Vowel, Event.Vowel, State.End)

@@ -1,2 +1,2 @@
-import mapatei/[letters, syllable, word]
-export letters, syllable, word
+import mapatei/[dictionary, letters, syllable, word]
+export dictionary, letters, syllable, word
