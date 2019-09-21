@@ -2,7 +2,7 @@ import strformat
 import syllable
 
 type
-  Word* = object
+  Word* = ref object
     syllables*: seq[Syllable]
 
   InvalidWord* = object of Exception
@@ -13,6 +13,7 @@ proc `$`*(w: Word): string =
 
 proc parse*(word: string): Word =
   var first = true
+  result = Word()
 
   for syll in word.syllables:
     if not first and syll.stressed:

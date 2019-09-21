@@ -19,11 +19,6 @@ type
     animate = "animate",
     inanimate = "inanimate"
 
-  #[Tense* = enum
-    noTense,
-    Present = "present",
-    Past = "past"]#
-
   DictWord* = object
     word*: seq[Word]
     gloss*: string
