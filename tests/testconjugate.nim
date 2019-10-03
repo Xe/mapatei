@@ -12,10 +12,24 @@ suite "reduplication":
 
       check $word == expectedWords[i]
 
-suite "load conjugation rules":
+suite "conjugation rules":
   var rules: Rules
 
   test "load rules":
     rules = loadRules()
     check:
       rules.len != 0
+
+suite "deconjugateSuffix":
+  type Case = tuple[word, suffix, want: string]
+  let cases: seq[Case] = @[
+    ("raja", "ja", "ra"),
+    ("ondokoja", "ja", "ondoko"),
+    ("amemephi", "phi", "ameme"),
+    ("kīmafu", "fu", "kīma"),
+  ]
+
+  for cs in cases:
+    test fmt"{cs.word} -> {cs.want}":
+      let interm = deconjugateSuffix(word.parse(cs.word), cs.suffix)
+      check interm == cs.want

@@ -11,6 +11,9 @@ proc `$`*(w: Word): string =
   for s in w.syllables:
     result = result & s.display
 
+proc `==`*(w: Word, str: string): bool =
+  $w == str
+
 proc parse*(word: string): Word =
   var first = true
   result = Word()

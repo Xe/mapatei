@@ -62,3 +62,11 @@ proc loadRules*(): Rules =
       rule.prefixWord = some word.parse(row[3])
 
     result.add rule
+
+proc deconjugateSuffix*(w: Word, suffix: string): Word =
+  deepCopy result, w
+
+  if result.syllables[result.syllables.len - 1] == suffix:
+    discard result.syllables.pop
+
+

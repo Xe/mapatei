@@ -27,6 +27,9 @@ proc display*(s: Syllable): string =
   else:
     result = result & s.vowel.value
 
+proc `==`*(s: Syllable, str: string): bool =
+  s.display == str
+
 proc toEvent(l: Letter): Event =
   if l.isVowel:
     result = Event.Vowel
