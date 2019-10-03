@@ -1,4 +1,4 @@
-import options, strformat, unittest
+import json, options, strformat, unittest
 import mapatei/[conjugate, word]
 
 suite "reduplication":
@@ -11,3 +11,11 @@ suite "reduplication":
       word.reduplicateFirstSyllable
 
       check $word == expectedWords[i]
+
+suite "load conjugation rules":
+  var rules: Rules
+
+  test "load rules":
+    rules = loadRules()
+    check:
+      rules.len != 0

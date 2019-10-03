@@ -1,4 +1,4 @@
-import json, options, tables, strformat, strutils
+import options, tables, parsecsv, streams, strutils
 import dictionary, letters, syllable, word
 
 type
@@ -29,14 +29,36 @@ proc reduplicateFirstSyllable*(w: Word) =
   w.syllables.add s
 
 const
-  rulesData = slurp "conjugationRules.json"
+  ruleData = slurp "conjugationRules.csv"
 
 type
-  Rule = object
-    suffix: string
-    prefixWord: string
-    reduplicateFirstSyllable: bool
+  Rule* = object
+    partOfSpeech*: PartOfSpeech
+    name*: string
+    suffix*: string
+    prefixWord*: Option[Word]
+    reduplicateFirstSyllable*: bool
 
-  Rules = OrderedTable[PartOfSpeech, OrderedTable[string, Rule]]
+  Rules* = seq[Rule]
 
-let rules: Rules = rulesData.parseJson.to Rules
+proc loadRules*(): Rules =
+  var s = ruleData.newStringStream
+  doAssert s != nil, "can't open this as a stream???"
+
+  var cp: CsvParser
+  cp.open s, "rules data"
+  cp.readHeaderRow
+
+  while cp.readRow:
+    let row = cp.row
+    var rule = Rule(
+      partOfSpeech: parseEnum[PartOfSpeech](row[0]),
+      name: row[1],
+      suffix: row[2],
+      reduplicateFirstSyllable: row[4] == "true",
+    )
+
+    if row[3] != "":
+      rule.prefixWord = some word.parse(row[3])
+
+    result.add rule

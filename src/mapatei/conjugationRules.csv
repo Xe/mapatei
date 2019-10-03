@@ -1,0 +1,25 @@
+Part of Speech,Conjugation,Suffix,Prefix Word,Reduplicate First Syllable
+Noun,singular,,,
+Noun,plural,ja,,
+Verb,past singular,fu,,
+Verb,past plural,phi,,
+Verb,present singular,,,
+Verb,present plural,ja,,
+Verb,future singular,,māu,
+Verb,future plural,ja,māu,
+Determiner,human singular,ra,,
+Determiner,animal singular,mi,,
+Determiner,animate singular,sa,,
+Determiner,inanimate singular,li,,
+Determiner,human plural,fo,,
+Determiner,animal plural,wa,,
+Determiner,animate plural,to,,
+Determiner,inanimate plural,wato,,
+Numeral,ordinal human,ra,,
+Numeral,ordinal animal,mi,,
+Numeral,ordinal animate,sa,,
+Numeral,ordinal inanimate,li,,
+Numeral,cardinal human,ra,,true
+Numeral,cardinal animal,mi,,true
+Numeral,cardinal animate,sa,,true
+Numeral,cardinal inanimate,li,,true
